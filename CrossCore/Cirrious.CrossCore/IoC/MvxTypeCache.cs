@@ -33,7 +33,7 @@ namespace Cirrious.CrossCore.IoC
                 return;
 
             var viewType = typeof(TType);
-            var query = from type in assembly.ExceptionSafeGetTypes()
+            var query = from type in assembly.ExceptionSafeExportedTypes()
                         where viewType.IsAssignableFrom(type)
                         select type;
 

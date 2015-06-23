@@ -16,11 +16,11 @@ namespace Cirrious.CrossCore.IoC
 {
     public static class MvxTypeExtensions
     {
-        public static IEnumerable<Type> ExceptionSafeGetTypes(this Assembly assembly)
+        public static IEnumerable<Type> ExceptionSafeExportedTypes(this Assembly assembly)
         {
             try
             {
-                return assembly.GetTypes();
+                return assembly.ExportedTypes;
             }
             catch (ReflectionTypeLoadException e)
             {
@@ -33,7 +33,7 @@ namespace Cirrious.CrossCore.IoC
         public static IEnumerable<Type> CreatableTypes(this Assembly assembly)
         {
             return assembly
-                .ExceptionSafeGetTypes()
+                .ExceptionSafeExportedTypes()
                 .Select(t => t.GetTypeInfo())
                 .Where(t => !t.IsAbstract)
                 .Where(t => t.DeclaredConstructors.Any(c => !c.IsStatic && c.IsPublic))

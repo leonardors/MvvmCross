@@ -37,13 +37,13 @@ namespace Cirrious.CrossCore.Plugins
         {
             var assembly = LoadAssembly(toLoad);
 
-            //var pluginTypes = assembly.ExceptionSafeGetTypes().Select(x => x.FullName);
+            //var pluginTypes = assembly.ExceptionSafeExportedTypes().Select(x => x.FullName);
             //foreach (var type in pluginTypes)
             //{
             //    MvxTrace.Trace("-- Type {0}", type);
             //}
 
-            var pluginType = assembly.ExceptionSafeGetTypes().FirstOrDefault(x => typeof(IMvxPlugin).IsAssignableFrom(x));
+            var pluginType = assembly.ExceptionSafeExportedTypes().FirstOrDefault(x => typeof(IMvxPlugin).IsAssignableFrom(x));
             if (pluginType == null)
             {
                 throw new MvxException("Could not find plugin type in assembly");

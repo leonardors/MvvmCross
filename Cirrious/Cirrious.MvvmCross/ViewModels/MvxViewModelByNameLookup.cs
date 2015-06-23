@@ -48,7 +48,7 @@ namespace Cirrious.MvvmCross.ViewModels
 
         public void AddAll(Assembly assembly)
         {
-            var viewModelTypes = from type in assembly.ExceptionSafeGetTypes()
+            var viewModelTypes = from type in assembly.ExceptionSafeExportedTypes()
                                 where !type.GetTypeInfo().IsAbstract
                                 where !type.GetTypeInfo().IsInterface
                                 where typeof (IMvxViewModel).IsAssignableFrom(type)
